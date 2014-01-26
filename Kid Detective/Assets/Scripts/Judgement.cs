@@ -13,14 +13,7 @@ public class Judgement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (Player.punchedDog)
-        {
-            Dog.SetActive(true);
-            Player.howManyPunched++;
-        }
-        else
-            Dog.SetActive(false);
-
+  
         if (Player.punchedUncle)
         {
             Uncle.SetActive(true);
