@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class PeopleInteractionLogicIso : MonoBehaviour {
 
     public bool spotted = false;
-    //public bool active = false;
-    public static bool useButtons = false;
+    public bool useButtons = false;
+    public bool active = true;
 
     /*
     public Texture2D NPC;
@@ -21,10 +21,7 @@ public class PeopleInteractionLogicIso : MonoBehaviour {
 
     
 
-    public Texture2D Punch;
-    public Texture2D Kiss;
-    public Texture2D Bribe;
-    public Texture2D Ask;
+
 
     void Start()
     {
@@ -51,62 +48,20 @@ public class PeopleInteractionLogicIso : MonoBehaviour {
     // Use this for initialization
     void Update()
     {
+        if (active)
         Raycasting();
     }
 
     void Raycasting()
     {
         spotted = Physics2D.OverlapCircle(transform.localPosition, 1.0f, 1 << LayerMask.NameToLayer("Player"));
-    }
 
-    void OnGUI()
-    {
-        if (spotted && active)
+        if (spotted)
         {
             PlayerControllerPokemon.inDialog = true;
-            GUI.BeginGroup(new Rect(Screen.width - 400, Screen.height - 245, 400, 300)); //Bottom Right - Player Dialog
-
-            if (useButtons)
-            {
-
-                if (GUI.Button(new Rect(35, 170, 60, 60), Punch))
-                {
-                   // int index = 1;
-
-                   // LoadNewInstance(index);
-                    //active = false;
-                    //PlayerControllerPokemon.inDialog = false;
-                }
-
-                if (GUI.Button(new Rect(105, 170, 60, 60), Ask))
-                {
-                    //active = false;
-                  //  int index = 2;
-
-                   // LoadNewInstance(index);
-                    // PlayerControllerPokemon.inDialog = false;
-                }
-                if (GUI.Button(new Rect(175, 170, 60, 60), Kiss))
-                {
-                    //active = false;
-                   // int index = 3;
-
-                    //LoadNewInstance(index);
-                    // PlayerControllerPokemon.inDialog = false;
-                }
-                if (GUI.Button(new Rect(245, 170, 60, 60), Bribe))
-                {
-                    //active = false;
-                   // int index = 4;
-
-                    //LoadNewInstance(index);
-                    // PlayerControllerPokemon.inDialog = false;
-                }
-            }
-            GUI.EndGroup();        
-
         }
     }
+
     /*
     void LoadNewInstance(int index)
     {
