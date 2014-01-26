@@ -32,7 +32,7 @@ public class PlayerControllerPokemon : MonoBehaviour
                 //Checks if facing right. If so, flip sprite.
                 if (transform.localScale.x > 0f)
                     transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
+                if(_animator) 
                 _animator.Play(Animator.StringToHash("Walk"));
             }
             else if (Input.GetAxis("Horizontal") > 0)
@@ -40,7 +40,7 @@ public class PlayerControllerPokemon : MonoBehaviour
                 //Checks if facing left. If so, flip sprite.
                 if (transform.localScale.x < 0f)
                     transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
+                if (_animator) 
                 _animator.Play(Animator.StringToHash("Walk"));
             }
 
@@ -55,6 +55,7 @@ public class PlayerControllerPokemon : MonoBehaviour
             }
             else
             {
+                if (_animator) 
                 _animator.Play(Animator.StringToHash("Idle"));
             }
 

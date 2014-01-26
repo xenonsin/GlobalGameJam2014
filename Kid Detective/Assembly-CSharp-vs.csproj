@@ -65,6 +65,8 @@
      <Compile Include="Assets\Scripts\Level Transitions\DiningRoomToKitchen.cs" />
      <Compile Include="Assets\Scripts\Level Transitions\DiningRoomToLivingRoom.cs" />
      <Compile Include="Assets\Scripts\Level Transitions\FrontDoor.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\KitchenToBedRoom.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\KitchenToDiningRoom.cs" />
      <Compile Include="Assets\Scripts\Level Transitions\LivingRoomToDiningRoom.cs" />
      <Compile Include="Assets\Scripts\Level Transitions\LivingRoomToPorch.cs" />
      <Compile Include="Assets\Scripts\NPC\Aunt.cs" />
@@ -72,6 +74,7 @@
      <Compile Include="Assets\Scripts\NPC\Dog.cs" />
      <Compile Include="Assets\Scripts\NPC\Grandma.cs" />
      <Compile Include="Assets\Scripts\NPC\Grandpa.cs" />
+     <Compile Include="Assets\Scripts\NPC\Kathy.cs" />
      <Compile Include="Assets\Scripts\NPC\Mom.cs" />
      <Compile Include="Assets\Scripts\NPC\Uncle.cs" />
      <Compile Include="Assets\Scripts\OpeningSceneScript.cs" />

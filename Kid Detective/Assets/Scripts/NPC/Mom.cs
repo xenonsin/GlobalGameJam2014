@@ -212,6 +212,8 @@ public class Mom : MonoBehaviour {
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToMom = true;
+
+            Application.LoadLevel("Bed Room");
         }
              
     }

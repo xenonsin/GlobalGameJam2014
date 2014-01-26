@@ -143,6 +143,7 @@ public class Uncle : MonoBehaviour
         if (scene == 1 && count == 0)
         {
             npcText = "Oww! What the blazes?";
+            useButtons = false;
         }
         if (scene == 1 && count == 1)
         {
