@@ -29,28 +29,34 @@ public class Mom : MonoBehaviour {
     public Texture2D Bribe;
     public Texture2D Ask;
 
+    public AudioClip PunchSound;
+    public AudioClip KissSound;
+    public AudioClip BribeSound;
+    public AudioClip AskSound;
+
     private bool canPunch = true;
+    private bool canAsk = true;
     private bool canKiss = true;
     private bool canBribe = true;
-    private bool canAsk = true;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         Players = GameObject.FindGameObjectsWithTag("Player");
         PlayerPortait = Players[0].GetComponent<Player>().Portrait;
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         StartCoroutine(Mouse());
 
         MotherTree();
-	
-	}
+
+    }
 
     void OnGUI()
     {
@@ -77,7 +83,7 @@ public class Mom : MonoBehaviour {
                 GUI.Box(new Rect(0, 0, 300, 150), "", PlayerSpeechBubble);
                 GUI.Label(new Rect(0, 10, 200, 50), playerText, PlayerFont);
                 GUI.EndGroup();
-        
+
             }
 
             if (useButtons)
@@ -88,6 +94,7 @@ public class Mom : MonoBehaviour {
                     scene = 1;
                     count = 0;
                     canPunch = false;
+                    audio.PlayOneShot(PunchSound);
                 }
 
                 if (canAsk && GUI.Button(new Rect(105, 170, 60, 60), Ask))
@@ -95,18 +102,21 @@ public class Mom : MonoBehaviour {
                     scene = 2;
                     count = 0;
                     canAsk = false;
+                    audio.PlayOneShot(AskSound);
                 }
                 if (Player.obtainedKiss && canKiss && GUI.Button(new Rect(175, 170, 60, 60), Kiss))
                 {
                     scene = 3;
                     count = 0;
                     canKiss = false;
+                    audio.PlayOneShot(KissSound);
                 }
                 if (Player.obtainedBribe && canBribe && GUI.Button(new Rect(245, 170, 60, 60), Bribe))
                 {
                     scene = 4;
                     count = 0;
                     canBribe = false;
+                    audio.PlayOneShot(BribeSound);
                 }
             }
 
@@ -134,7 +144,8 @@ public class Mom : MonoBehaviour {
         //Scene 1 = Punch
         if (scene == 1 && count == 0)
         {
-            npcText = "Ow! You scamp!  George!";
+            npcText = "Ow! You rapscallion!  George!";
+            useButtons = false;
         }
         if (scene == 1 && count == 1)
         {
@@ -143,6 +154,7 @@ public class Mom : MonoBehaviour {
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToMom = true;
+            Application.LoadLevel("Main Menu");
         }
 
 
@@ -151,7 +163,7 @@ public class Mom : MonoBehaviour {
         if (scene == 2 && count == 0)
        {
             PlayerisTalking = true;
-            playerText = "Have you seen Charlie?  She’s only two years old.  It’s a matter of life and death.";
+            playerText = "Fess up, what did you do with Charlie?";
             useButtons = false;
    
        }
@@ -159,7 +171,7 @@ public class Mom : MonoBehaviour {
         if (scene == 2 && count == 1)
         {
            PlayerisTalking = false;
-           npcText = "Dear, I am quite busy cleaning up the boys’ mess here.  Let’s do this some other time, huh?";
+           npcText = "Charlie? I have no idea, really.  I’m quite busy cooking, why don’t you come back to me tomorrow morning?";
            useButtons = true;
         }
 
@@ -175,23 +187,33 @@ public class Mom : MonoBehaviour {
         if (scene == 4 && count == 0)
         {
             PlayerisTalking = true;
-            playerText = "Here, will this help you? ";
+            playerText = "Here, will this help you and your memory2? ";
             useButtons = false;
 
         }
         if (scene == 4 && count == 1)
         {
             PlayerisTalking = false;
-            npcText = "Why, yes, I do believe so.  What a dear.  Hm, you would actually want to talk to Cathy.  Follow me.";
-            useButtons = true;
+            npcText = "What’s this? ... Oh your face is so dirty, let me clean you up dear.";
         }
         if (scene == 4 && count == 2)
+        {
+            PlayerisTalking = true;
+            playerText = "I’m looking for Charlie, she’s gone missing.";
+        }
+
+        if (scene == 4 && count == 3)
+        {
+            PlayerisTalking = false;
+            npcText = "Oh dear. I think my daughter may have something to do with this.  You can go up to her room and speak to her.";
+        }
+        if (scene == 4 && count == 4)
         {
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToMom = true;
         }
-            
+             
     }
 
     IEnumerator Mouse()

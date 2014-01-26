@@ -34,6 +34,11 @@ public class Dad : MonoBehaviour
     public Texture2D Bribe;
     public Texture2D Ask;
 
+    public AudioClip PunchSound;
+    public AudioClip KissSound;
+    public AudioClip BribeSound;
+    public AudioClip AskSound;
+
     private bool canPunch = true;
     private bool canAsk = true;
     private bool canKiss = true;
@@ -95,6 +100,7 @@ public class Dad : MonoBehaviour
                     scene = 1;
                     count = 0;
                     canPunch = false;
+                    audio.PlayOneShot(PunchSound);
                 }
 
                 if (canAsk && GUI.Button(new Rect(105, 170, 60, 60), Ask))
@@ -102,18 +108,21 @@ public class Dad : MonoBehaviour
                     scene = 2;
                     count = 0;
                     canAsk = false;
+                    audio.PlayOneShot(AskSound);
                 }
                 if (Player.obtainedKiss && canKiss && GUI.Button(new Rect(175, 170, 60, 60), Kiss))
                 {
                     scene = 3;
                     count = 0;
                     canKiss = false;
+                    audio.PlayOneShot(KissSound);
                 }
                 if (Player.obtainedBribe && canBribe && GUI.Button(new Rect(245, 170, 60, 60), Bribe))
                 {
                     scene = 4;
                     count = 0;
                     canBribe = false;
+                    audio.PlayOneShot(BribeSound);
                 }
             }
 
@@ -130,9 +139,10 @@ public class Dad : MonoBehaviour
         {
             PlayerisTalking = false;
             npcText = "What were you thinking?";
+            useButtons = false;
         }
 
-        
+        //
         if (Player.punchedDog && scene == 0 && count == 1)
         {
             
@@ -144,9 +154,9 @@ public class Dad : MonoBehaviour
             npcText = "That bathroom was occupied!";
             npcPortrait = Daddy;
         }
+        //
 
-
-
+        //
         if (Player.punchedUncle && scene == 0 && count == 2)
         {
             npcText = "She hit me out of nowhere!";
@@ -157,9 +167,9 @@ public class Dad : MonoBehaviour
             npcText = "Luckily, I was about finished...";
             npcPortrait = Daddy;
         }
+        //
 
-
-
+        //
         if (Player.punchedGrandma && scene == 0 && count == 3)
         {
             npcText = "She's just trouble!";
@@ -170,7 +180,9 @@ public class Dad : MonoBehaviour
             npcText = "You could of caught me mid bombardment...";
             npcPortrait = Daddy;
         }
+        //
 
+        //
         if (Player.punchedGrandpa && scene == 0 && count == 4)
         {
             npcText = "She knocked me out!";
@@ -181,7 +193,9 @@ public class Dad : MonoBehaviour
             npcText = "That would have been terrible...";
             npcPortrait = Daddy;
         }
+        //
 
+        //
         if (Player.punchedAunt && scene == 0 && count == 5)
         {
             npcText = "I was being harrassed!";
@@ -192,12 +206,23 @@ public class Dad : MonoBehaviour
             npcPortrait = Daddy;
             npcText = "The horrors you would have seen...";
         }
+        //
 
+        //
         if (Player.howManyPunched > 4 && scene == 0 && count == 6)
         {
             npcPortrait = Daddy;
             npcText = "Alright, everyone please calm down. Everything is under control. You’re in big trouble, missy. Come with me.";
         }
+        else if (scene == 0 && count == 6)
+        {
+            npcPortrait = Daddy;
+            npcText = "Anyway, what do you need?";
+            useButtons = true;
+        }
+        //
+
+        //
         if (Player.howManyPunched > 4 && scene == 0 && count == 7)
         {
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
@@ -211,89 +236,92 @@ public class Dad : MonoBehaviour
             }
         }
 
+        else if (scene == 0 && count == 7)
+        {
+        }
+        //
+
 
         //Scene 1 = Punch
+
+        if (scene == 1 && count == 0)
+        {
+            PlayerisTalking = false;
+            npcText = "What do you think you’re doing? Come here.";
+            useButtons = false;
+        }
+
         if (scene == 1 && count == 1)
         {
-            Player.punchedDad = true;
-            Player.howManyPunched++;
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
             this.GetComponent<PeopleInteractionLogicIso>().enabled = false;
             PlayerControllerPokemon.inDialog = false;
-            Player.talkedToDad = true;
+            transform.Translate(new Vector2(-3 * Time.deltaTime, 0));
+
+            if (transform.position.x < -7)
+            {
+                Application.LoadLevel("Main Menu");
+            }
         }
 
+        /*
+        */
+        
+
         //Scene 2 = Ask
+
         if (scene == 2 && count == 0)
         {
             PlayerisTalking = true;
-            playerText = "WHERE IS SHE?!... I mean... Where’s Charlie?";
+            playerText = "I heard you're the boss, Tell me where is Charlie.";
             useButtons = false;
         }
-
         if (scene == 2 && count == 1)
         {
             PlayerisTalking = false;
-            npcText = "Haha Oh honey, the world has loads of Charlies. Why don’t you check up with the boss?";
+            npcText = "Charlies gone missing? I heard about that. But there’s nothing I can do, you’re going to have to talk to the real boss, she’s in the kitchen.";
+        }
+        if (scene == 2 && count == 2) //Fade to black
+        {
+            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            PlayerControllerPokemon.inDialog = false;
+            Player.talkedToDad = true;
+
+            Application.LoadLevel("Dining Room");
         }
 
-        if (scene == 2 && count == 2)
-        {
-            PlayerisTalking = true;
-            playerText = "Alright.";
-            useButtons = false;
-        }
-
-        if (Player.choco && scene == 2 && count == 3)
-        {
-            PlayerisTalking = false;
-            npcText = "You better clean yourself up before you speak to him.";
-            useButtons = true;
-        }
-        else if (scene == 2 && count == 3)
-        {
-            useButtons = true;
-        }
+        
 
 
         //Scene 3 = Kiss
         if (Player.choco && scene == 3 && count == 0)
         {
             PlayerisTalking = false;
-            npcText = "Get your dirty mouth away from me! Here take my money!";
-            Player.obtainedBribe = true;
+            npcText = "Oh thats disgusting you’re getting chocolate all over me!";
+            useButtons = true;
 
         }
         else if (scene == 3 && count == 0)
         {
             PlayerisTalking = false;
-            npcText = "Hun, not now please.";
+            npcText = "What’s the matter with you?";
+            useButtons = true;
         }
-        if (Player.choco && scene == 3 && count == 1)
-        {
-            NPCisTalking = false;
-            PlayerisTalking = true;
-            playerText = "I can bribe someone with this!";
-        }
-        else if (scene == 3 && count == 1)
-        {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
-            PlayerControllerPokemon.inDialog = false;
-            Player.talkedToDad = true;
-        }
-        if (Player.choco && scene == 3 && count == 2)
-        {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
-            PlayerControllerPokemon.inDialog = false;
-            Player.talkedToDad = true;
-        }
+        
 
         //Scene 4 = Bribe
         if (scene == 4 && count == 0)
         {
-            //PlayerisTalking = true;
-            //playerText = "Here, will this help you? ";
+            PlayerisTalking = true;
+            playerText = "Here, for your troubles.";
+            useButtons = true;
+        }
 
+        if (scene == 4 && count == 1)
+        {
+            PlayerisTalking = false;
+            npcText = "Why don’t you use that for yourself!";
+            useButtons = true;
         }
 
     }

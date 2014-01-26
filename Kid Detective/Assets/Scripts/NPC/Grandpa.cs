@@ -27,12 +27,17 @@ public class Grandpa : MonoBehaviour
     public Texture2D Bribe;
     public Texture2D Ask;
 
+    public AudioClip PunchSound;
+    public AudioClip KissSound;
+    public AudioClip BribeSound;
+    public AudioClip AskSound;
+
     private bool canPunch = true;
     private bool canAsk = true;
     private bool canKiss = true;
     private bool canBribe = true;
 
-    private float temp = 0;
+    private float temp;
 
     // Use this for initialization
     void Start()
@@ -89,6 +94,7 @@ public class Grandpa : MonoBehaviour
                     scene = 1;
                     count = 0;
                     canPunch = false;
+                    audio.PlayOneShot(PunchSound);
                 }
 
                 if (canAsk && GUI.Button(new Rect(105, 170, 60, 60), Ask))
@@ -96,18 +102,21 @@ public class Grandpa : MonoBehaviour
                     scene = 2;
                     count = 0;
                     canAsk = false;
+                    audio.PlayOneShot(AskSound);
                 }
                 if (Player.obtainedKiss && canKiss && GUI.Button(new Rect(175, 170, 60, 60), Kiss))
                 {
                     scene = 3;
                     count = 0;
                     canKiss = false;
+                    audio.PlayOneShot(KissSound);
                 }
                 if (Player.obtainedBribe && canBribe && GUI.Button(new Rect(245, 170, 60, 60), Bribe))
                 {
                     scene = 4;
                     count = 0;
                     canBribe = false;
+                    audio.PlayOneShot(BribeSound);
                 }
             }
 
@@ -136,6 +145,7 @@ public class Grandpa : MonoBehaviour
         {
             PlayerisTalking = false;
             npcText = "Oh my stomach!";
+            useButtons = false;
         }
 
         if (scene == 1 && count == 1)
