@@ -11,7 +11,7 @@ public class Mom : MonoBehaviour {
     public int scene = 0;
 
     public Texture2D NPC;
-    public GameObject[] Player;
+    public GameObject[] Players;
     private Texture2D PlayerPortait;
     private string npcText;
     private string playerText;
@@ -38,8 +38,8 @@ public class Mom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        Player = GameObject.FindGameObjectsWithTag("Player");
-        PlayerPortait = Player[0].GetComponent<Player>().Portrait;
+        Players = GameObject.FindGameObjectsWithTag("Player");
+        PlayerPortait = Players[0].GetComponent<Player>().Portrait;
 	
 	}
 	
@@ -56,6 +56,7 @@ public class Mom : MonoBehaviour {
     {
         if (this.GetComponent<PeopleInteractionLogicIso>().spotted && this.GetComponent<PeopleInteractionLogicIso>().active)
         {
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), ""); //Background
             GUI.BeginGroup(new Rect(Screen.width / 2 - (Screen.width / 2), Screen.height / 2 - (Screen.height / 2), Screen.width, Screen.height));
             GUI.Label(new Rect(Screen.width - NPC.width, 0, NPC.width, NPC.height), NPC); //Top Right - NPC Portrait
             if (NPCisTalking)
@@ -95,13 +96,13 @@ public class Mom : MonoBehaviour {
                     count = 0;
                     canAsk = false;
                 }
-                if (canKiss && GUI.Button(new Rect(175, 170, 60, 60), Kiss))
+                if (Player.obtainedKiss && canKiss && GUI.Button(new Rect(175, 170, 60, 60), Kiss))
                 {
                     scene = 3;
                     count = 0;
                     canKiss = false;
                 }
-                if (canBribe && GUI.Button(new Rect(245, 170, 60, 60), Bribe))
+                if (Player.obtainedBribe && canBribe && GUI.Button(new Rect(245, 170, 60, 60), Bribe))
                 {
                     scene = 4;
                     count = 0;
@@ -118,7 +119,13 @@ public class Mom : MonoBehaviour {
     {
 
         //Scene 0 = Default
-        if (scene == 0 && count == 0)
+        if (Player.talkedToMom)
+        {
+            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<PeopleInteractionLogicIso>().enabled = false;
+            PlayerControllerPokemon.inDialog = false;
+        }
+        else if (scene == 0 && count == 0)
         {
             npcText = "Hello, what do you need dear?";
             useButtons = true;
@@ -131,8 +138,11 @@ public class Mom : MonoBehaviour {
         }
         if (scene == 1 && count == 1)
         {
+            Player.punchedMom = true;
+            Player.howManyPunched++;
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
             PlayerControllerPokemon.inDialog = false;
+            Player.talkedToMom = true;
         }
 
 
@@ -142,6 +152,7 @@ public class Mom : MonoBehaviour {
        {
             PlayerisTalking = true;
             playerText = "Have you seen Charlie?  She’s only two years old.  It’s a matter of life and death.";
+            useButtons = false;
    
        }
 
@@ -149,10 +160,11 @@ public class Mom : MonoBehaviour {
         {
            PlayerisTalking = false;
            npcText = "Dear, I am quite busy cleaning up the boys’ mess here.  Let’s do this some other time, huh?";
+           useButtons = true;
         }
 
         //Scene 3 = Kiss
-        if (scene == 3 && count == 0)
+        if (Player.choco && scene == 3 && count == 0)
         {
             //PlayerisTalking = true;
             npcText = "Oh! That is so unsanitary, dear!  Don’t you have anything to wipe yourself up with?";
@@ -164,13 +176,20 @@ public class Mom : MonoBehaviour {
         {
             PlayerisTalking = true;
             playerText = "Here, will this help you? ";
+            useButtons = false;
 
         }
         if (scene == 4 && count == 1)
         {
             PlayerisTalking = false;
             npcText = "Why, yes, I do believe so.  What a dear.  Hm, you would actually want to talk to Cathy.  Follow me.";
-
+            useButtons = true;
+        }
+        if (scene == 4 && count == 2)
+        {
+            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            PlayerControllerPokemon.inDialog = false;
+            Player.talkedToMom = true;
         }
             
     }

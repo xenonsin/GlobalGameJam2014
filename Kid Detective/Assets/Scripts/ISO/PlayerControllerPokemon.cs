@@ -58,10 +58,15 @@ public class PlayerControllerPokemon : MonoBehaviour
                 _animator.Play(Animator.StringToHash("Idle"));
             }
 
+
             _velocity.x = Input.GetAxisRaw("Horizontal") * runSpeed;
             _velocity.y = Input.GetAxisRaw("Vertical") * runSpeed;
 
             _controller.move(_velocity * Time.deltaTime);
+        }
+        else
+        {
+            _animator.Play(Animator.StringToHash("Idle"));
         }
     }
 }

@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\2D\CharacterController2D.cs" />
      <Compile Include="Assets\Scripts\2D\PlayerController.cs" />
      <Compile Include="Assets\Scripts\2D\PlayerInteraction2D.cs" />
+     <Compile Include="Assets\Scripts\BathroomScript.cs" />
      <Compile Include="Assets\Scripts\FadeInOut.cs" />
      <Compile Include="Assets\Scripts\ISO\NPC.cs" />
      <Compile Include="Assets\Scripts\ISO\PeopleInteractionLogicIso.cs" />
@@ -59,6 +60,13 @@
      <Compile Include="Assets\Scripts\ISO\Punch.cs" />
      <Compile Include="Assets\Scripts\ISO\SmoothFollow.cs" />
      <Compile Include="Assets\Scripts\ISO\iniParser.cs" />
+     <Compile Include="Assets\Scripts\Judgement.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\DiningRoomToBathRoom.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\DiningRoomToKitchen.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\DiningRoomToLivingRoom.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\FrontDoor.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\LivingRoomToDiningRoom.cs" />
+     <Compile Include="Assets\Scripts\Level Transitions\LivingRoomToPorch.cs" />
      <Compile Include="Assets\Scripts\NPC\Aunt.cs" />
      <Compile Include="Assets\Scripts\NPC\Dad.cs" />
      <Compile Include="Assets\Scripts\NPC\Dog.cs" />
