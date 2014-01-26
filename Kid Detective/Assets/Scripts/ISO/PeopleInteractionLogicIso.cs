@@ -1,13 +1,51 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PeopleInteractionLogicIso : MonoBehaviour {
 
-    private bool spotted = false;
-    private bool active = true;
+    public bool spotted = false;
+    //public bool active = false;
+    public static bool useButtons = false;
 
+    /*
     public Texture2D NPC;
-    public Texture2D Player;
+    public GameObject[] Player;
+    private Texture2D PlayerPortait;
+
+    public List<int> DialogInstances = new List<int>();
+   
+    private List<string> NPCdialog = new List<string>();
+    private List<string> playerDialog = new List<string>();
+    private int NPCDialogNumber = 0;
+    private int playerDialogNumber = 0;*/
+
+    
+
+    public Texture2D Punch;
+    public Texture2D Kiss;
+    public Texture2D Bribe;
+    public Texture2D Ask;
+
+    void Start()
+    {
+        /*Player = GameObject.FindGameObjectsWithTag("Player");
+        //PlayerPortait = Player[0].GetComponent<Player>().Portrait;
+
+        //NPC DIALOG
+        iniParser NPCparser = new iniParser(IniFiles.NPC_DIALOG);
+        for (int i = 0; i < NPCparser.GetNumberKeyUnderSubGroup(this.name); i++)
+        {
+           NPCdialog.Add(NPCparser.Get(this.name, this.name + i.ToString()));
+        }
+
+        //PLAYER DIALOG
+        iniParser playerParser = new iniParser(IniFiles.PLAYER_DIALOG);
+        for (int i = 0; i < playerParser.GetNumberKeyUnderSubGroup(this.name); i++)
+        {
+            playerDialog.Add(playerParser.Get(this.name, this.name + i.ToString()));
+        }*/
+
+    }
 
 
     // Use this for initialization
@@ -18,48 +56,75 @@ public class PeopleInteractionLogicIso : MonoBehaviour {
 
     void Raycasting()
     {
-        spotted = Physics2D.OverlapCircle(transform.localPosition, 2.0f, 1 << LayerMask.NameToLayer("Player"));
+        spotted = Physics2D.OverlapCircle(transform.localPosition, 1.0f, 1 << LayerMask.NameToLayer("Player"));
     }
-    /*
-    void Behaviors()
-    {
-        if (spotted)
-        {
-            arrow.SetActive(true);
-        }
-        else
-        {
-            arrow.SetActive(false);
-        }
-    }*/
 
     void OnGUI()
     {
         if (spotted && active)
         {
             PlayerControllerPokemon.inDialog = true;
-            GUI.BeginGroup(new Rect(Screen.width / 2 - (Screen.width / 2), Screen.height / 2 - (Screen.height / 2), Screen.width, Screen.height));
-            GUI.Label(new Rect(Screen.width - NPC.width, 0, NPC.width, NPC.height), NPC); //Top Right - NPC Portrait
-            GUI.Box(new Rect(0, 0, 300, 200), "YOU ASSHOLE"); //Top Left - NPC Dialog
+            GUI.BeginGroup(new Rect(Screen.width - 400, Screen.height - 245, 400, 300)); //Bottom Right - Player Dialog
 
-            GUI.Label(new Rect(0, Screen.height - Player.height, Player.width, Player.height), Player); //Botto Left - Player Portrait
-            GUI.BeginGroup(new Rect(Screen.width - 300, Screen.height - 200, 300, 200)); //Bottom Right - Player Dialog
-            GUI.Box(new Rect(0, 0, 300, 200), "NO YOU!");
-            if(GUI.Button(new Rect(50,50,100,100), "Punch"))
+            if (useButtons)
             {
-                active = false;
-                PlayerControllerPokemon.inDialog = false;
+
+                if (GUI.Button(new Rect(35, 170, 60, 60), Punch))
+                {
+                   // int index = 1;
+
+                   // LoadNewInstance(index);
+                    //active = false;
+                    //PlayerControllerPokemon.inDialog = false;
+                }
+
+                if (GUI.Button(new Rect(105, 170, 60, 60), Ask))
+                {
+                    //active = false;
+                  //  int index = 2;
+
+                   // LoadNewInstance(index);
+                    // PlayerControllerPokemon.inDialog = false;
+                }
+                if (GUI.Button(new Rect(175, 170, 60, 60), Kiss))
+                {
+                    //active = false;
+                   // int index = 3;
+
+                    //LoadNewInstance(index);
+                    // PlayerControllerPokemon.inDialog = false;
+                }
+                if (GUI.Button(new Rect(245, 170, 60, 60), Bribe))
+                {
+                    //active = false;
+                   // int index = 4;
+
+                    //LoadNewInstance(index);
+                    // PlayerControllerPokemon.inDialog = false;
+                }
             }
-            if (GUI.Button(new Rect(150, 50, 100, 100), "Interrogate"))
-            {
-                active = false;
-                PlayerControllerPokemon.inDialog = false;
-            }
-            GUI.EndGroup();
-            GUI.EndGroup();
-            
+            GUI.EndGroup();        
+
         }
     }
+    /*
+    void LoadNewInstance(int index)
+    {
+        int numberBefore = 0;
+        int temp = DialogInstances[index];
+
+        for (int i = 0; i < index; i++)
+        {
+            numberBefore += DialogInstances[i];
+            Debug.Log("Number before: " + numberBefore.ToString());
+        }
+
+        for (int i = 0; i < temp; i++)
+        {
+            NPCDialogNumber = numberBefore + i;
+            Debug.Log(NPCDialogNumber.ToString());
+        }
+    }*/
 }
 
 /*

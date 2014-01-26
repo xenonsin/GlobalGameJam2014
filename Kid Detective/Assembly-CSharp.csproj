@@ -50,11 +50,21 @@
      <Compile Include="Assets\Scripts\2D\CharacterController2D.cs" />
      <Compile Include="Assets\Scripts\2D\PlayerController.cs" />
      <Compile Include="Assets\Scripts\2D\PlayerInteraction2D.cs" />
+     <Compile Include="Assets\Scripts\ISO\NPC.cs" />
      <Compile Include="Assets\Scripts\ISO\PeopleInteractionLogicIso.cs" />
+     <Compile Include="Assets\Scripts\ISO\Player.cs" />
      <Compile Include="Assets\Scripts\ISO\PlayerControllerPokemon.cs" />
      <Compile Include="Assets\Scripts\ISO\PlayerOutcome.cs" />
+     <Compile Include="Assets\Scripts\ISO\Punch.cs" />
      <Compile Include="Assets\Scripts\ISO\SmoothFollow.cs" />
      <Compile Include="Assets\Scripts\ISO\iniParser.cs" />
+     <Compile Include="Assets\Scripts\NPC\Aunt.cs" />
+     <Compile Include="Assets\Scripts\NPC\Dad.cs" />
+     <Compile Include="Assets\Scripts\NPC\Dog.cs" />
+     <Compile Include="Assets\Scripts\NPC\Grandma.cs" />
+     <Compile Include="Assets\Scripts\NPC\Grandpa.cs" />
+     <Compile Include="Assets\Scripts\NPC\Mom.cs" />
+     <Compile Include="Assets\Scripts\NPC\Uncle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

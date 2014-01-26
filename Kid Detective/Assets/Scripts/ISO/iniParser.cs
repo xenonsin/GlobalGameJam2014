@@ -19,7 +19,8 @@ public enum IniFiles{
 	// Enum is being used so its easy to get the right names from other scripts, Less chance for errors
 	// If you wish to not use an Enum, change "(IniFiles file)" to "(String file)" on the methods below 
 	// (being: DoesExist, Save and load)
-	DIALOG
+	NPC_DIALOG,
+    PLAYER_DIALOG
 }
 
 /// <summary>
@@ -147,6 +148,20 @@ public class iniParser {
 
 		return list;
 	}
+
+    public int GetNumberKeyUnderSubGroup(string subSection)
+    {
+        int numberKeys = 0;
+
+        for (int i = 0; i < subSections.Count; i++)
+        {
+            if (subSections[i].Equals(subSection))
+            {
+                numberKeys++;
+            }
+        }
+        return numberKeys;
+    }
 
 	/// <summary>
 	/// Removes the selected Variable including its value and comment.
