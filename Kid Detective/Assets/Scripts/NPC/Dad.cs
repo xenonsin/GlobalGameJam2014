@@ -226,7 +226,6 @@ public class Dad : MonoBehaviour
         if (Player.howManyPunched > 4 && scene == 0 && count == 7)
         {
             this.GetComponent<PeopleInteractionLogicIso>().active = false;
-            this.GetComponent<PeopleInteractionLogicIso>().enabled = false;
             PlayerControllerPokemon.inDialog = false;
             transform.Translate(new Vector2(-3 * Time.deltaTime, 0));
 

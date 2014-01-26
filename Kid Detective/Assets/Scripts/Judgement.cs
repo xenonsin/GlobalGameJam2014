@@ -13,30 +13,45 @@ public class Judgement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    if(Player.punchedDog)
-        Dog.SetActive(true);
-    else
-        Dog.SetActive(false);
+        if (Player.punchedDog)
+        {
+            Dog.SetActive(true);
+            Player.howManyPunched++;
+        }
+        else
+            Dog.SetActive(false);
 
-    if(Player.punchedUncle)
-        Uncle.SetActive(true);
-    else
-        Uncle.SetActive(false);
+        if (Player.punchedUncle)
+        {
+            Uncle.SetActive(true);
+            Player.howManyPunched++;
+        }
+        else
+            Uncle.SetActive(false);
 
-    if(Player.punchedGrandma)
-        Grandma.SetActive(true);
-    else
-        Grandma.SetActive(false);
+        if (Player.punchedGrandma)
+        {
+            Grandma.SetActive(true);
+            Player.howManyPunched++;
+        }
+        else
+            Grandma.SetActive(false);
 
-    if(Player.punchedGrandpa)
-        Grandpa.SetActive(true);
-    else
-        Grandpa.SetActive(false);
+        if (Player.punchedGrandpa)
+        {
+            Grandpa.SetActive(true);
+            Player.howManyPunched++;
+        }
+        else
+            Grandpa.SetActive(false);
 
-    if(Player.punchedAunt)
-        Aunt.SetActive(true);
-    else
-        Aunt.SetActive(false);
+        if (Player.punchedAunt)
+        {
+            Aunt.SetActive(true);
+            Player.howManyPunched++;
+        }
+        else
+            Aunt.SetActive(false);
 
 
 	

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class LivingRoomToDiningRoom : MonoBehaviour {
 
-    public bool spotted = false;
 
     // Use this for initialization
     void Start()
@@ -15,9 +14,7 @@ public class LivingRoomToDiningRoom : MonoBehaviour {
     void Update()
     {
 
-        spotted = Physics2D.OverlapCircle(transform.localPosition, 1.0f, 1 << LayerMask.NameToLayer("Player"));
-
-        if (spotted)
+        if (Player.talkedToGrandma && this.GetComponent<MofoDoor>().active)
             Application.LoadLevel("Dining Room");
     }
 }

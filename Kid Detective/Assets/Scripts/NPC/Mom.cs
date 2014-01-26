@@ -60,7 +60,7 @@ public class Mom : MonoBehaviour {
 
     void OnGUI()
     {
-        if (this.GetComponent<PeopleInteractionLogicIso>().spotted && this.GetComponent<PeopleInteractionLogicIso>().active)
+        if (this.GetComponent<ClickMofo>().active)
         {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), ""); //Background
             GUI.BeginGroup(new Rect(Screen.width / 2 - (Screen.width / 2), Screen.height / 2 - (Screen.height / 2), Screen.width, Screen.height));
@@ -131,8 +131,7 @@ public class Mom : MonoBehaviour {
         //Scene 0 = Default
         if (Player.talkedToMom)
         {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
-            this.GetComponent<PeopleInteractionLogicIso>().enabled = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
         }
         else if (scene == 0 && count == 0)
@@ -151,7 +150,7 @@ public class Mom : MonoBehaviour {
         {
             Player.punchedMom = true;
             Player.howManyPunched++;
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToMom = true;
             Application.LoadLevel("Main Menu");
@@ -195,6 +194,7 @@ public class Mom : MonoBehaviour {
         {
             PlayerisTalking = false;
             npcText = "What’s this? ... Oh your face is so dirty, let me clean you up dear.";
+            //WorldTransition.good = true;
         }
         if (scene == 4 && count == 2)
         {
@@ -209,7 +209,7 @@ public class Mom : MonoBehaviour {
         }
         if (scene == 4 && count == 4)
         {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToMom = true;
 

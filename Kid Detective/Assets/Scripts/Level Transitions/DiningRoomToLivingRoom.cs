@@ -10,6 +10,8 @@ public class DiningRoomToLivingRoom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (this.GetComponent<MofoDoor>().active)
+            Application.LoadLevel("Living Room");
 	
 	}
 }

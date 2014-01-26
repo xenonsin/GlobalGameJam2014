@@ -6,7 +6,8 @@ public class Kathy : MonoBehaviour
 
     private bool useButtons = false;
     private int count = 0;
-    public int scene = 0;
+    private int scene = 0;
+    public bool activate = false;
 
     public Texture2D NPC;
     public GameObject[] Players;
@@ -23,19 +24,13 @@ public class Kathy : MonoBehaviour
     public GUIStyle PlayerSpeechBubble;
 
     public Texture2D Punch;
-    public Texture2D Kiss;
-    public Texture2D Bribe;
     public Texture2D Ask;
 
     public AudioClip PunchSound;
-    public AudioClip KissSound;
-    public AudioClip BribeSound;
     public AudioClip AskSound;
 
     private bool canPunch = true;
     private bool canAsk = true;
-    private bool canKiss = true;
-    private bool canBribe = true;
 
     // Use this for initialization
     void Start()
@@ -59,7 +54,7 @@ public class Kathy : MonoBehaviour
 
     void OnGUI()
     {
-        if (this.GetComponent<PeopleInteractionLogicIso>().spotted && this.GetComponent<PeopleInteractionLogicIso>().active)
+        if (this.GetComponent<ClickMofo>().active)
         {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), ""); //Background
             GUI.BeginGroup(new Rect(Screen.width / 2 - (Screen.width / 2), Screen.height / 2 - (Screen.height / 2), Screen.width, Screen.height));
@@ -92,7 +87,7 @@ public class Kathy : MonoBehaviour
                 {
                     scene = 1;
                     count++;
-                    canPunch = false;
+                    //canPunch = false;
                     audio.PlayOneShot(PunchSound);
                 }
 
@@ -167,8 +162,10 @@ public class Kathy : MonoBehaviour
 
         if (scene == 2 && count == 2)
         {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
+
+            Application.LoadLevel("Half");
 
         }
 

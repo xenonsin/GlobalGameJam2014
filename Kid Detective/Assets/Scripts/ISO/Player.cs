@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     public static bool talkedToAunt = false;
     public static bool talkedToDad = false;
     public static bool talkedToMom = false;
+    public static bool talkedToKathy = false;
 
     public static int howManyPunched = 0;
 
@@ -45,6 +46,9 @@ public class Player : MonoBehaviour {
         {
             chocos.SetActive(false);
         }
+
+
+        
 	
 	}
 }

@@ -48,18 +48,37 @@ public class PeopleInteractionLogicIso : MonoBehaviour {
     // Use this for initialization
     void Update()
     {
-        if (active)
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Debug.Log ("Button Works");
+            //Raycast fro screen
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit)
+            {
+                if (hit.transform.tag == "People")
+                {
+                    Debug.Log("Hit!");
+                    PlayerControllerPokemon.inDialog = true;
+                    spotted = true;
+                    var enemyscript = hit.transform.GetComponent<ClickMofo>();
+                    enemyscript.active = true;
+                }
+
+                if (hit.transform.tag == "Door")
+                {
+                    var enemyscript = hit.transform.GetComponent<MofoDoor>();
+                    enemyscript.active = true;
+                }
+            }
+        }
+
         Raycasting();
     }
 
     void Raycasting()
     {
         spotted = Physics2D.OverlapCircle(transform.localPosition, 1.0f, 1 << LayerMask.NameToLayer("Player"));
-
-        if (spotted)
-        {
-            PlayerControllerPokemon.inDialog = true;
-        }
+ 
     }
 
     /*

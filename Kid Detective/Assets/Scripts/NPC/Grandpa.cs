@@ -60,7 +60,7 @@ public class Grandpa : MonoBehaviour
 
     void OnGUI()
     {
-        if (this.GetComponent<PeopleInteractionLogicIso>().spotted && this.GetComponent<PeopleInteractionLogicIso>().active)
+        if (this.GetComponent<ClickMofo>().active)
         {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), ""); //Background
             GUI.BeginGroup(new Rect(Screen.width / 2 - (Screen.width / 2), Screen.height / 2 - (Screen.height / 2), Screen.width, Screen.height));
@@ -130,8 +130,7 @@ public class Grandpa : MonoBehaviour
         //Scene 0 = Default
         if (Player.talkedToGrandpa)
         {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
-            this.GetComponent<PeopleInteractionLogicIso>().enabled = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
         }
         else if (scene == 0 && count == 0)
@@ -151,8 +150,7 @@ public class Grandpa : MonoBehaviour
         if (scene == 1 && count == 1)
         {
             Player.punchedGrandpa = true;
-            Player.howManyPunched++;
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToGrandpa = true;
 
@@ -198,7 +196,7 @@ public class Grandpa : MonoBehaviour
         }
         if (scene == 2 && count == 5)
         {
-            this.GetComponent<PeopleInteractionLogicIso>().active = false;
+            this.GetComponent<ClickMofo>().active = false;
             PlayerControllerPokemon.inDialog = false;
             Player.talkedToGrandpa = true;
         }
